@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Competitive Exam Quiz - AIcademy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Advanced quiz system for JEE, GATE, and Boards preparation" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/Style.css" rel="stylesheet">
+    
+    <!-- Competitive Quiz Styles -->
+    <style>
+        .competitive-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .exam-selector {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .exam-card {
+            border: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .exam-card.active {
+            border: 3px solid #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .quiz-setup-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 3rem;
+        }
+        
+        .syllabus-tracker {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .syllabus-topic {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .syllabus-topic:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .difficulty-badge {
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .difficulty-badge.easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .difficulty-badge.medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .difficulty-badge.hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .question-card.enhanced {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .question-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .question-number {
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .subtopic-badge {
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+        }
+        
+        .score-badge {
+            background: #fff3e0;
+            color: #f57c00;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+        }
+        
+        .formula-hint {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            color: #0c4a6e;
+        }
+        
+        .option-item.enhanced {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .option-item.enhanced:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .option-item.enhanced input[type="radio"]:checked + label {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .concept-tags {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .concept-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 15px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            margin: 0.25rem;
+            display: inline-block;
+        }
+        
+        .study-tips {
+            background: #fff8e1;
+            border: 1px solid #ffb300;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .study-tips summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #ef6c00;
+        }
+        
+        .results-analytics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .analytics-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .topic-performance {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .topic-name {
+            flex-grow: 1;
+            font-weight: 600;
+        }
+        
+        .topic-stats {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .progress {
+            width: 100px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .difficulty-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .difficulty-label {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .incorrect-item {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .answer-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .recommendation-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .rec-icon {
+            font-size: 2rem;
+        }
+        
+        .rec-content {
+            flex-grow: 1;
+        }
+        
+        .rec-action {
+            border-radius: 20px;
+        }
+        
+        .adaptive-learning-card {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="m-0 text-primary"><i class="fa fa-book-reader me-3"></i>AIcademy</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav mx-auto">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="#" class="nav-item nav-link">About Us</a>
+                    <a href="#" class="nav-item nav-link">Classes</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            <a href="quiz-bot.html" class="dropdown-item">General Quiz</a>
+                            <a href="sst-quiz-bot.html" class="dropdown-item">SST Quiz Bot</a>
+                            <a href="competitive-quiz.html" class="dropdown-item active">Competitive Exams</a>
+                            <a href="resource.html" class="dropdown-item">Study Resources</a>
+                            <a href="tutorial.html" class="dropdown-item">Tutorial</a>
+                            <a href="chatbot.html" class="dropdown-item">Chatbot</a>
+                            <a href="#" class="dropdown-item" onclick="showLeaderboard()">Leaderboard</a>
+                            <a href="#" class="dropdown-item">Team Page</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link">Contact Us</a>
+                </div>
+                <a href="#" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Join Us<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+        <!-- Hero Section -->
+        <div class="competitive-hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h1 class="display-4 mb-3">🎯 Competitive Exam Quiz</h1>
+                        <p class="lead mb-4">Advanced AI-powered quiz system for JEE, GATE, and Board exam preparation with adaptive learning and comprehensive analytics</p>
+                        <div class="d-flex gap-3 mb-4">
+                            <span class="badge bg-light text-dark px-3 py-2">
+                                <i class="fas fa-brain me-2"></i>AI-Enhanced Questions
+                            </span>
+                            <span class="badge bg-light text-dark px-3 py-2">
+                                <i class="fas fa-chart-line me-2"></i>Adaptive Learning
+                            </span>
+                            <span class="badge bg-light text-dark px-3 py-2">
+                                <i class="fas fa-book me-2"></i>Syllabus Tracking
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="stats-grid text-center">
+                            <div class="stat-item">
+                                <div class="stat-number" id="exam-stats">0</div>
+                                <div class="stat-label">Total Questions</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero Section End -->
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <!-- Exam Selection -->
+            <div class="exam-selector">
+                <h4 class="text-center mb-4"><i class="fas fa-graduation-cap me-2"></i>Select Your Exam</h4>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card exam-card active" data-exam="jee">
+                            <div class="card-body text-center">
+                                <i class="fas fa-atom fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">JEE Main & Advanced</h5>
+                                <p class="card-text">Physics, Chemistry, Mathematics</p>
+                                <small class="text-muted">Engineering Entrance</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card exam-card" data-exam="gate">
+                            <div class="card-body text-center">
+                                <i class="fas fa-microchip fa-3x text-success mb-3"></i>
+                                <h5 class="card-title">GATE</h5>
+                                <p class="card-text">Computer Science, Electrical, Mechanical</p>
+                                <small class="text-muted">Graduate Aptitude Test</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card exam-card" data-exam="boards">
+                            <div class="card-body text-center">
+                                <i class="fas fa-school fa-3x text-warning mb-3"></i>
+                                <h5 class="card-title">Class 12 Boards</h5>
+                                <p class="card-text">CBSE, ICSE Board Exams</p>
+                                <small class="text-muted">Secondary Education</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Left Sidebar -->
+                <div class="col-lg-3">
+                    <!-- Syllabus Tracker -->
+                    <div class="syllabus-tracker">
+                        <div id="syllabus-tracker">
+                            <!-- Dynamic syllabus content -->
+                        </div>
+                    </div>
+
+                    <!-- Adaptive Learning -->
+                    <div class="adaptive-learning-card text-center">
+                        <h6><i class="fas fa-robot me-2"></i>Adaptive Learning</h6>
+                        <p class="small mb-3">AI analyzes your performance to suggest personalized questions</p>
+                        <button class="btn btn-light btn-sm" id="adaptive-quiz">
+                            <i class="fas fa-magic me-2"></i>Start Adaptive Quiz
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Quiz Area -->
+                <div class="col-lg-9">
+                    <!-- Quiz Setup -->
+                    <div id="quiz-setup">
+                        <div class="quiz-setup-card">
+                            <div class="text-center mb-4">
+                                <i class="fas fa-trophy text-primary" style="font-size: 3rem;"></i>
+                                <h3 class="mt-3">Advanced Quiz Generator</h3>
+                                <p class="text-muted">Create customized quizzes with AI-enhanced questions and detailed analytics</p>
+                            </div>
+
+                            <form id="competitive-quiz-form">
+                                <div class="row g-3">
+                                    <!-- Exam Selector (Hidden, controlled by exam cards) -->
+                                    <input type="hidden" id="exam-selector" value="jee">
+
+                                    <!-- Subject Selection -->
+                                    <div class="col-md-6">
+                                        <label for="subject-selector" class="form-label">Subject</label>
+                                        <select class="form-select" id="subject-selector">
+                                            <option value="physics">Physics</option>
+                                            <option value="chemistry">Chemistry</option>
+                                            <option value="mathematics">Mathematics</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Topic Input -->
+                                    <div class="col-md-6">
+                                        <label for="topic-input" class="form-label">Topic (Optional)</label>
+                                        <input type="text" class="form-control" id="topic-input" placeholder="Enter specific topic...">
+                                    </div>
+
+                                    <!-- Topic Suggestions -->
+                                    <div class="col-12">
+                                        <label class="form-label">Popular Topics:</label>
+                                        <div id="topic-suggestions" class="d-flex flex-wrap gap-2">
+                                            <!-- Dynamic topic suggestions -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Difficulty and Questions -->
+                                    <div class="col-md-6">
+                                        <label for="difficulty-selector" class="form-label">Difficulty Level</label>
+                                        <select class="form-select" id="difficulty-selector">
+                                            <option value="easy">Easy (Beginner)</option>
+                                            <option value="medium" selected>Medium (Intermediate)</option>
+                                            <option value="hard">Hard (Advanced)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="num-questions" class="form-label">Number of Questions</label>
+                                        <select class="form-select" id="num-questions">
+                                            <option value="5">5 Questions</option>
+                                            <option value="10" selected>10 Questions</option>
+                                            <option value="15">15 Questions</option>
+                                            <option value="20">20 Questions</option>
+                                            <option value="25">25 Questions</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- AI Training Toggle -->
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="ai-training-toggle">
+                                            <label class="form-check-label" for="ai-training-toggle">
+                                                <i class="fas fa-robot me-2"></i>Enable AI-Enhanced Question Generation
+                                                <small class="text-muted d-block">Uses advanced AI for better question quality and personalization</small>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="col-12 text-center">
+                                        <button class="btn btn-primary btn-lg px-5" type="submit">
+                                            <i class="fas fa-rocket me-2"></i>Generate Quiz
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Loading Screen -->
+                    <div id="quiz-loading" class="text-center py-5" style="display: none;">
+                        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;"></div>
+                        <h4>Generating Your Quiz...</h4>
+                        <p class="text-muted">Creating personalized questions using our advanced AI system</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <small class="text-success">✓ Analyzing syllabus</small>
+                            <small class="text-info">✓ Selecting questions</small>
+                            <small class="text-warning">✓ Adding explanations</small>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Container -->
+                    <div id="quiz-container" style="display: none;">
+                        <!-- Quiz Header -->
+                        <div class="quiz-header bg-primary text-white rounded-top p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h3 class="mb-0" id="quiz-title">Competitive Quiz</h3>
+                                    <div id="quiz-info" class="mt-2">
+                                        <!-- Quiz metadata -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-md-end">
+                                    <div class="quiz-progress mb-2">
+                                        <span id="current-question">1</span> / <span id="total-questions">10</span>
+                                    </div>
+                                    <div class="quiz-score">
+                                        Score: <span id="current-score">0</span> / <span id="max-score">10</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Content -->
+                        <div class="quiz-content bg-light rounded-bottom p-4">
+                            <div id="quiz-questions">
+                                <!-- Questions will be dynamically inserted here -->
+                            </div>
+                        </div>
+
+                        <!-- Quiz Controls -->
+                        <div class="quiz-controls text-center mt-4">
+                            <button class="btn btn-outline-primary me-3" id="prev-btn" disabled>
+                                <i class="fas fa-arrow-left me-2"></i>Previous
+                            </button>
+                            <button class="btn btn-primary" id="next-btn">
+                                Next<i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                            <button class="btn btn-success" id="finish-btn" style="display: none;">
+                                <i class="fas fa-check me-2"></i>Finish Quiz
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Results -->
+                    <div id="quiz-results" style="display: none;">
+                        <div class="results-card bg-light rounded p-5 text-center">
+                            <!-- Results Header -->
+                            <div class="results-header mb-4">
+                                <i class="fas fa-medal text-warning" style="font-size: 4rem;"></i>
+                                <h2 class="mt-3">Quiz Completed!</h2>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <div class="score-display bg-white rounded p-4">
+                                            <h3 class="text-primary">Your Score</h3>
+                                            <div class="score-circle">
+                                                <span id="final-score" class="display-2 text-primary">0</span>
+                                                <span class="h4">/ <span id="final-total">10</span></span>
+                                            </div>
+                                            <div class="mt-3">
+                                                <span id="score-percentage" class="h4">0%</span>
+                                                <div class="mt-2">
+                                                    <span class="badge badge-lg" id="grade-display">A+</span>
+                                                    <p class="text-muted mt-1" id="grade-description">Outstanding</p>
+                                                </div>
+                                            </div>
+                                            <small class="text-muted">Time taken: <span id="time-taken">0m 0s</span></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Results Analytics -->
+                            <div class="results-analytics">
+                                <div class="analytics-card">
+                                    <div id="topic-breakdown">
+                                        <!-- Topic-wise performance -->
+                                    </div>
+                                </div>
+
+                                <div class="analytics-card">
+                                    <div id="difficulty-analysis">
+                                        <!-- Difficulty analysis -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Incorrect Questions Review -->
+                            <div class="mt-5">
+                                <div id="incorrect-questions">
+                                    <!-- Incorrect questions with explanations -->
+                                </div>
+                            </div>
+
+                            <!-- Personalized Recommendations -->
+                            <div class="mt-5">
+                                <div id="recommendations">
+                                    <!-- AI-generated recommendations -->
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="results-actions mt-4">
+                                <button class="btn btn-primary me-3" id="retake-quiz">
+                                    <i class="fas fa-redo me-2"></i>Retake Quiz
+                                </button>
+                                <button class="btn btn-outline-primary me-3" id="new-quiz">
+                                    <i class="fas fa-plus me-2"></i>New Quiz
+                                </button>
+                                <button class="btn btn-success" id="adaptive-quiz">
+                                    <i class="fas fa-magic me-2"></i>Adaptive Learning
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Get In Touch</h3>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Quick Links</h3>
+                        <a class="btn btn-link text-white-50" href="index.html">Home</a>
+                        <a class="btn btn-link text-white-50" href="resource.html">Study Resources</a>
+                        <a class="btn btn-link text-white-50" href="sst-quiz-bot.html">SST Quiz</a>
+                        <a class="btn btn-link text-white-50" href="competitive-quiz.html">Competitive Exams</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Competitive Exams</h3>
+                        <a class="btn btn-link text-white-50" href="">JEE Main & Advanced</a>
+                        <a class="btn btn-link text-white-50" href="">GATE</a>
+                        <a class="btn btn-link text-white-50" href="">Class 12 Boards</a>
+                        <a class="btn btn-link text-white-50" href="">NEET</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Newsletter</h3>
+                        <p>Stay updated with latest quiz questions and study materials.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">AIcademy</a>, All Right Reserved.
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Competitive Quiz</a>
+                                <a href="">Resources</a>
+                                <a href="">Help</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Competitive Exam Knowledge Base -->
+    <script src="js/competitive-exam-knowledge-base.js"></script>
+    
+    <!-- PDF Scanner -->
+    <script src="js/pdf-scanner.js"></script>
+    
+    <!-- Progress Tracker -->
+    <script src="js/progress-tracker.js"></script>
+    
+    <!-- Leaderboard System -->
+    <script src="js/leaderboard-system.js"></script>
+    
+    <!-- Book Recommendation Engine -->
+    <script src="js/book-recommendation-engine.js"></script>
+    
+    <!-- Study Plan Generator -->
+    <script src="js/study-plan-generator.js"></script>
+    
+    <!-- Competitive Quiz Bot -->
+    <script src="js/competitive-quiz-bot.js"></script>
+
+    <script>
+        // Initialize all systems
+        window.bookRecommendationEngine = new BookRecommendationEngine();
+        window.pdfScanner = new PDFScanner();
+        window.progressTracker = new ProgressTracker();
+        window.leaderboardSystem = new LeaderboardSystem();
+        
+        // PDF upload handling
+        async function handleFileUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const progressDiv = document.getElementById('upload-progress');
+            const resultDiv = document.getElementById('upload-result');
+            const errorDiv = document.getElementById('upload-error');
+            
+            // Hide previous results
+            resultDiv.classList.add('d-none');
+            errorDiv.classList.add('d-none');
+            progressDiv.classList.remove('d-none');
+            
+            try {
+                const result = await window.pdfScanner.processFile(file, (progress) => {
+                    document.getElementById('progress-percentage').textContent = `${Math.round(progress)}%`;
+                });
+                
+                // Store the extracted content
+                document.getElementById('uploaded-content').value = JSON.stringify(result);
+                document.getElementById('upload-success-text').textContent = 
+                    `Processed ${result.fileName} - ${result.wordCount} words extracted`;
+                
+                progressDiv.classList.add('d-none');
+                resultDiv.classList.remove('d-none');
+                
+            } catch (error) {
+                document.getElementById('upload-error-text').textContent = error.message;
+                progressDiv.classList.add('d-none');
+                errorDiv.classList.remove('d-none');
+            }
+        }
+
+        // Show leaderboard modal
+        function showLeaderboard() {
+            const modalHtml = `
+                <div class="modal fade" id="leaderboardModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title"><i class="fas fa-trophy me-2"></i>Leaderboard</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-primary" id="lb-alltime-btn">All Time</button>
+                                        <button type="button" class="btn btn-outline-primary" id="lb-weekly-btn">This Week</button>
+                                        <button type="button" class="btn btn-outline-primary" id="lb-monthly-btn">This Month</button>
+                                    </div>
+                                    <small class="text-muted">Tip: Complete quizzes to climb the ranks!</small>
+                                </div>
+                                <div id="leaderboard-content"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Remove existing modal if present
+            const existing = document.getElementById('leaderboardModal');
+            if (existing) existing.remove();
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+            // Helper to render leaderboard into the modal
+            function renderLeaderboard(category) {
+                const container = document.getElementById('leaderboard-content');
+                try {
+                    const html = window.leaderboardSystem.generateLeaderboardHTML('global', category, 20);
+                    container.innerHTML = html;
+                } catch (e) {
+                    container.innerHTML = `<div class="alert alert-danger">Failed to load leaderboard: ${e.message}</div>`;
+                }
+            }
+
+            // Wire category buttons
+            document.getElementById('lb-alltime-btn').addEventListener('click', () => renderLeaderboard('allTime'));
+            document.getElementById('lb-weekly-btn').addEventListener('click', () => renderLeaderboard('weekly'));
+            document.getElementById('lb-monthly-btn').addEventListener('click', () => renderLeaderboard('monthly'));
+
+            // Show modal and load default
+            const modal = new bootstrap.Modal(document.getElementById('leaderboardModal'));
+            modal.show();
+            renderLeaderboard('allTime');
+        }
+
+        // Show progress report modal
+        function showProgressReport() {
+            const progressData = window.progressTracker.getDetailedProgress();
+            const rankingInfo = window.leaderboardSystem.getUserRankingInfo();
+            
+            const modalHtml = `
+                <div class="modal fade" id="progressModal" tabindex="-1">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title">
+                                    <i class="fas fa-chart-line me-2"></i>Your Progress Report
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                ${generateProgressReportHTML(progressData, rankingInfo)}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="exportProgressData()">
+                                    <i class="fas fa-download me-2"></i>Export Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal
+            const existing = document.getElementById('progressModal');
+            if (existing) existing.remove();
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            const modal = new bootstrap.Modal(document.getElementById('progressModal'));
+            modal.show();
+        }
+        
+        // Generate progress report HTML
+        function generateProgressReportHTML(progressData, rankingInfo) {
+            let html = `
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-primary text-white h-100">
+                            <div class="card-body text-center">
+                                <h2 class="display-4">${progressData.percentile}th</h2>
+                                <p class="card-text">Global Percentile</p>
+                                <small>Better than ${progressData.percentile}% of users</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white h-100">
+                            <div class="card-body text-center">
+                                <h2 class="display-4">#${rankingInfo.globalRank?.allTime || 'N/A'}</h2>
+                                <p class="card-text">Global Rank</p>
+                                <small>All Time Leaderboard</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-info text-white h-100">
+                            <div class="card-body text-center">
+                                <h2 class="display-4">${progressData.userProfile.level}</h2>
+                                <p class="card-text">Current Level</p>
+                                <small>${progressData.nextLevelProgress.xpNeededForNext} XP to next level</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-chart-bar me-2"></i>Performance Statistics</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Total Quizzes:</span>
+                                    <strong>${progressData.statistics.totalQuizzes}</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Average Score:</span>
+                                    <strong>${progressData.statistics.averageScore}%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Current Streak:</span>
+                                    <strong>${progressData.statistics.currentStreak} days</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Longest Streak:</span>
+                                    <strong>${progressData.statistics.longestStreak} days</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Experience Points:</span>
+                                    <strong>${progressData.statistics.experiencePoints} XP</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-trophy me-2"></i>Achievements</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    ${progressData.achievements.unlocked.slice(0, 6).map(achievement => `
+                                        <div class="col-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <span class="me-2">🏆</span>
+                                                <small>${achievement}</small>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                ${progressData.achievements.unlocked.length === 0 ? '<p class="text-muted">No achievements yet. Keep practicing!</p>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                ${progressData.weakTopics.length > 0 ? `
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card border-warning">
+                                <div class="card-header bg-warning text-dark">
+                                    <h5><i class="fas fa-exclamation-triangle me-2"></i>Areas for Improvement</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        ${progressData.weakTopics.slice(0, 6).map(topic => `
+                                            <div class="col-md-4 mb-3">
+                                                <div class="d-flex justify-content-between align-items-center p-2 bg-light rounded">
+                                                    <span class="small">${topic.topic}</span>
+                                                    <span class="badge bg-warning text-dark">${Math.round(topic.accuracy)}%</span>
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+            
+            return html;
+        }
+        
+        // Export progress data
+        function exportProgressData() {
+            window.progressTracker.exportProgressData();
+        }
+        
+        // Enhanced quiz result tracking
+        function trackQuizResult(results) {
+            // Track with progress tracker
+            if (window.progressTracker) {
+                window.progressTracker.recordQuizPerformance(results);
+            }
+            
+            // Update leaderboard
+            if (window.leaderboardSystem) {
+                window.leaderboardSystem.updateUserScore(null, results);
+            }
+        }
+        
+        // Exam card selection functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const examCards = document.querySelectorAll('.exam-card');
+            const examSelector = document.getElementById('exam-selector');
+
+            examCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove active class from all cards
+                    examCards.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked card
+                    this.classList.add('active');
+                    
+                    // Update hidden input
+                    const examType = this.dataset.exam;
+                    examSelector.value = examType;
+                    
+                    // Trigger exam interface update if competitive quiz bot is loaded
+                    if (window.competitiveQuizBot) {
+                        window.competitiveQuizBot.selectedExam = examType;
+                        window.competitiveQuizBot.updateExamInterface();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

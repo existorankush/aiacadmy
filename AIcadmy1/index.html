@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>AIcademy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Owl Carousel CSS -->
+    <link href="lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/owl.theme.default.min.css" rel="stylesheet">
+    
+    <!-- Animate CSS for WOW.js -->
+    <link href="animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/Style.css" rel="stylesheet">
+    <style>
+        /********** Template CSS **********/
+:root {
+    --primary: #FE5D37;
+    --light: #FFF5F3;
+    --dark: #103741;
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
+}
+
+
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*** Button ***/
+.btn {
+    font-weight: 500;
+    transition: .5s;
+}
+
+.btn.btn-primary {
+    color: #FFFFFF;
+    background-color: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(254, 93, 55, 0.3);
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--dark);
+    border-color: var(--dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 55, 65, 0.4);
+}
+
+.btn.btn-dark {
+    background-color: var(--dark);
+    border-color: var(--dark);
+    box-shadow: 0 4px 15px rgba(16, 55, 65, 0.3);
+}
+
+.btn.btn-dark:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(254, 93, 55, 0.4);
+}
+
+.btn-square {
+    width: 38px;
+    height: 38px;
+}
+
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+    border-radius: 50px;
+}
+
+
+/*** Heading ***/
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+    font-family: 'Lobster Two', cursive;
+    font-weight: 700;
+    color: #fd7e14;
+}
+
+h5,
+h6,
+.h5,
+.h6 {
+    font-weight: 600;
+    color: #fd7e14;
+}
+
+.font-secondary {
+    font-family: 'Lobster Two', cursive;
+    color: #fd7e14;
+}
+
+/* Override specific heading colors */
+.navbar-brand h1,
+.text-center h1,
+.mb-3,
+.mb-4 {
+    color: #fd7e14 !important;
+}
+
+/* Ensure all main headings use the orange color */
+.container h1,
+.container h2,
+.container h3,
+.container h4 {
+    color: #fd7e14 !important;
+}
+
+
+/*** Navbar ***/
+.navbar .navbar-nav .nav-link {
+    padding: 30px 15px;
+    color: var(--dark);
+    font-weight: 500;
+    outline: none;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+.navbar.sticky-top {
+    top: -100px;
+    transition: .5s;
+}
+
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    vertical-align: middle;
+    margin-left: 5px;
+    transition: .5s;
+}
+
+.navbar .dropdown-toggle[aria-expanded=true]::after {
+    transform: rotate(-180deg);
+}
+
+@media (max-width: 991.98px) {
+    .navbar .navbar-nav .nav-link  {
+        margin-right: 0;
+        padding: 10px 0;
+    }
+
+    .navbar .navbar-nav {
+        margin-top: 15px;
+        border-top: 1px solid #EEEEEE;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        top: calc(100% - 15px);
+        margin-top: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: .5s;
+        
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        top: 100%;
+        visibility: visible;
+        transition: .5s;
+        opacity: 1;
+    }
+}
+
+
+/*** Header ***/
+.header-carousel::before,
+.header-carousel::after,
+.page-header::before,
+.page-header::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 10px;
+    top: 0;
+    left: 0;
+    background: url(../img/bg-header-top.png) center center repeat-x;
+    z-index: 1;
+}
+
+.header-carousel::after,
+.page-header::after {
+    height: 19px;
+    top: auto;
+    bottom: 0;
+    background: url(../img/bg-header-bottom.png) center center repeat-x;
+}
+
+@media (max-width: 768px) {
+    .header-carousel .owl-carousel-item {
+        position: relative;
+        min-height: 500px;
+    }
+    
+    .header-carousel .owl-carousel-item img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .header-carousel .owl-carousel-item p {
+        font-size: 16px !important;
+        font-weight: 400 !important;
+    }
+
+    .header-carousel .owl-carousel-item h1 {
+        font-size: 30px;
+        font-weight: 600;
+    }
+}
+
+.header-carousel .owl-nav {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.header-carousel .owl-nav .owl-prev,
+.header-carousel .owl-nav .owl-next {
+    margin: 7px 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background: rgba(254, 93, 55, 0.8);
+    border: 2px solid #FFFFFF;
+    border-radius: 50px;
+    font-size: 24px;
+    transition: all .3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-carousel .owl-nav .owl-prev:hover,
+.header-carousel .owl-nav .owl-next:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(254, 93, 55, 0.4);
+}
+
+/*** Carousel Dots ***/
+.header-carousel .owl-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+}
+
+.header-carousel .owl-dots .owl-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid #FFFFFF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.header-carousel .owl-dots .owl-dot.active,
+.header-carousel .owl-dots .owl-dot:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.2);
+}
+
+.page-header {
+    background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), url(../img/attendance.jpg) center center no-repeat;
+    background-size: cover;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, .5);
+}
+
+
+/*** Facility ***/
+.facility-item .facility-icon {
+    position: relative;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.facility-item .facility-icon::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .9);
+    transition: .5s;
+    z-index: 1;
+}
+
+.facility-item .facility-icon span {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+}
+
+.facility-item .facility-icon span:last-child {
+    left: auto;
+    right: 0;
+}
+
+.facility-item .facility-icon svg {
+    position: relative;
+    z-index: 2;
+}
+.facility-item .facility-icon i {
+    position: relative;
+    z-index: 2;
+}
+
+.facility-item .facility-text {
+    position: relative;
+    min-height: 250px;
+    padding: 30px;
+    border-radius: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.facility-item .facility-text::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .9);
+    transition: .5s;
+    z-index: 1;
+}
+
+.facility-item .facility-text * {
+    position: relative;
+    z-index: 2;
+}
+
+.facility-item:hover .facility-icon::before,
+.facility-item:hover .facility-text::before {
+    background: transparent;
+}
+
+.facility-item * {
+    transition: .5s;
+}
+
+.facility-item:hover * {
+    color: #FFFFFF !important;
+}
+
+
+/*** About ***/
+.about-img img {
+    transition: .5s;
+}
+
+.about-img img:hover {
+    background: var(--primary) !important;
+}
+
+.square-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1; /* Ensures perfect square */
+    object-fit: cover;   /* Keeps image content proportional */
+}
+
+/*** Classes ***/
+.classes-item {
+    transition: .5s;
+    border: 3px solid var(--primary);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(254, 93, 55, 0.1);
+}
+
+.classes-item:hover {
+    margin-top: -10px;
+    box-shadow: 0 15px 30px rgba(254, 93, 55, 0.2);
+    transform: scale(1.02);
+}
+
+.classes-item .bg-light {
+    background-color: var(--light) !important;
+}
+
+.classes-item .bg-light.rounded-circle {
+    border: 2px solid var(--primary);
+}
+
+.classes-item .bg-primary {
+    background-color: var(--primary) !important;
+    border-radius: 25px !important;
+    padding: 8px 16px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+}
+
+.classes-item .bg-primary:hover {
+    background-color: var(--dark) !important;
+    transform: scale(1.05);
+}
+
+
+/*** Team ***/
+.team-item .team-text {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #FFFFFF;
+    border: 17px solid var(--light);
+    border-radius: 250px;
+    transition: .5s;
+}
+
+.team-item:hover .team-text {
+    border-color: var(--primary);
+}
+
+
+/*** Testimonial ***/
+.testimonial-carousel {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (min-width: 576px) {
+    .testimonial-carousel {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+.testimonial-carousel .testimonial-item .border {
+    border: 1px dashed rgba(0, 185, 142, .3) !important;
+}
+
+.testimonial-carousel .owl-nav {
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.testimonial-carousel .owl-nav .owl-prev,
+.testimonial-carousel .owl-nav .owl-next {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background: var(--primary);
+    border-radius: 45px;
+    font-size: 20px;
+    transition: .5s;
+}
+
+.testimonial-carousel .owl-nav .owl-prev:hover,
+.testimonial-carousel .owl-nav .owl-next:hover {
+    background: var(--dark);
+}
+
+
+/*** Footer ***/
+.footer .btn.btn-social {
+    margin-right: 5px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 45px;
+    transition: .3s;
+}
+
+.footer .btn.btn-social:hover {
+    border-color: var(--primary);
+    background: var(--primary);
+}
+
+.footer .btn.btn-link {
+    display: block;
+    margin-bottom: 5px;
+    padding: 0;
+    text-align: left;
+    font-size: 16px;
+    font-weight: normal;
+    text-transform: capitalize;
+    transition: .3s;
+}
+
+.footer .btn.btn-link::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .btn.btn-link:hover {
+    color: var(--primary) !important;
+    letter-spacing: 1px;
+    box-shadow: none;
+}
+
+.footer .form-control {
+    border-color: rgba(255,255,255,0.5);
+}
+
+.footer .copyright {
+    padding: 25px 0;
+    font-size: 15px;
+    border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .copyright a {
+    color: #FFFFFF;
+}
+
+.footer .footer-menu a {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.footer .copyright a:hover,
+.footer .footer-menu a:hover {
+    color: var(--primary) !important;
+}
+
+.footer .footer-menu a:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="m-0 text-primary"><i class="fa fa-book-reader me-3"></i>AIcademy</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav mx-auto">
+                    <a href="#" class="nav-item nav-link active">Home</a>
+                    <a href="#" class="nav-item nav-link">About Us</a>
+                    <a href="#" class="nav-item nav-link">Classes</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            <a href="sst-quiz-bot.html" class="dropdown-item">SST Quiz Bot</a>
+                            <a href="competitive-quiz.html" class="dropdown-item">Competitive Exams</a>
+                            <a href="resource.html" class="dropdown-item">Books & Resources</a>
+                            <a href="tutorial.html" class="dropdown-item">Tutorial</a>
+                            <a href="chatbot.html" class="dropdown-item">Chatbot</a>
+                            <a href="#" class="dropdown-item">Leaderboard</a>
+                            <a href="#" class="dropdown-item">Study Plans</a>
+                            <a href="#" class="dropdown-item">Progress Reports</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link">Contact Us</a>
+                </div>
+                <a href="#" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Join Us<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+
+        <!-- Carousel Start -->
+        <div class="container-fluid p-0 mb-5">
+            <div class="owl-carousel header-carousel position-relative">
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="img/attendance.jpg" alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(0, 0, 0, .2);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-10 col-lg-8">
+                                    <h1 class="display-2 text-white animated slideInDown mb-4">Learn smarter with real-time attendance, personalized study plans, and AI-powered teachers—your classroom, upgraded</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Scan your ID card to mark attendance instantly and automatically.</p>
+                
+                                    <a href="#" class="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft">See Attendance</a>
+                                    <a href="#" class="btn btn-dark rounded-pill py-sm-3 px-sm-5 animated slideInRight">Generate Qr</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="img/Quiz.jpg" alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(0, 0, 0, .2);">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-10 col-lg-8">
+                                    <h1 class="display-2 text-white animated slideInDown mb-4">Make A Brighter Future For Your Child</h1>
+                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Test your knowledge anytime with our smart AI quiz chatbot.</p>
+                                    <a href="" class="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft">See result</a>
+                                    <a href="competitive-quiz.html" class="btn btn-dark rounded-pill py-sm-3 px-sm-5 animated slideInRight">Start Quiz</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+
+
+        <!-- Facilities Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Facilities</h1>
+                    <p>AI-powered platform for smart attendance, personalized learning, and mentorship.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="facility-item">
+                            <div class="facility-icon bg-primary">
+                                <span class="bg-primary"></span>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="84" height="84" color="#FF0000" fill="none">
+    <path d="M11 8H13C15.8284 8 17.2426 8 18.1213 8.87868C19 9.75736 19 11.1716 19 14C19 16.8284 19 18.2426 18.1213 19.1213C17.2426 20 15.8284 20 13 20H12C12 20 11.5 22 8 22C8 22 9 20.9913 9 19.9827C7.44655 19.9359 6.51998 19.7626 5.87868 19.1213C5 18.2426 5 16.8284 5 14C5 11.1716 5 9.75736 5.87868 8.87868C6.75736 8 8.17157 8 11 8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+    <path d="M19 11.5H19.5C20.4346 11.5 20.9019 11.5 21.25 11.701C21.478 11.8326 21.6674 12.022 21.799 12.25C22 12.5981 22 13.0654 22 14C22 14.9346 22 15.4019 21.799 15.75C21.6674 15.978 21.478 16.1674 21.25 16.299C20.9019 16.5 20.4346 16.5 19.5 16.5H19" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+    <path d="M5 11.5H4.5C3.56538 11.5 3.09808 11.5 2.75 11.701C2.52197 11.8326 2.33261 12.022 2.20096 12.25C2 12.5981 2 13.0654 2 14C2 14.9346 2 15.4019 2.20096 15.75C2.33261 15.978 2.52197 16.1674 2.75 16.299C3.09808 16.5 3.56538 16.5 4.5 16.5H5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+    <path d="M13.5 3.5C13.5 4.32843 12.8284 5 12 5C11.1716 5 10.5 4.32843 10.5 3.5C10.5 2.67157 11.1716 2 12 2C12.8284 2 13.5 2.67157 13.5 3.5Z" stroke="currentColor" stroke-width="1.5"></path>
+    <path d="M12 5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M9 12V13M15 12V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M10 16.5C10 16.5 10.6667 17 12 17C13.3333 17 14 16.5 14 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+</svg>
+                                <span class="bg-primary"></span>
+                            </div>
+                            <div class="facility-text bg-primary">
+                                <h3 class="text-primary mb-3">chatbot</h3>
+                                <p class="mb-0">Solve your doubt with our chatbot</p>
+                                 <a href="" class="btn btn-dark rounded-pill py-sm-2 px-sm-8 animated slideInRight">Start Chating</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="facility-item">
+                            <div class="facility-icon bg-success">
+                                <span class="bg-success"></span>
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="104" height="104" color="#32CD32" fill="none">
+    <path d="M20.5 14V10.5C20.5 8.16537 20.5 6.99805 20.0277 6.11441C19.6548 5.4167 19.0833 4.84525 18.3856 4.47231C17.5019 4 16.3346 4 14 4C14 2.89543 13.1046 2 12 2C10.8954 2 10 2.89543 10 4C7.66537 4 6.49805 4 5.61441 4.47231C4.9167 4.84525 4.34525 5.4167 3.97231 6.11441C3.5 6.99805 3.5 8.16537 3.5 10.5V14C3.5 17.7712 3.5 19.6569 4.67157 20.8284C5.84315 22 7.72876 22 11.5 22H12.5C16.2712 22 18.1569 22 19.3284 20.8284C20.5 19.6569 20.5 17.7712 20.5 14Z" stroke="#32CD32" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" />
+    <path d="M6.5 10L10.5 10" stroke="#32CD32" stroke-width="1.0" stroke-linecap="round" />
+    <path d="M13.5 11C13.5 11 14 11 14.5 12C14.5 12 16.0882 9.5 17.5 9" stroke="#32CD32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M6.5 16L10.5 16" stroke="#32CD32" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M13.5 17C13.5 17 14 17 14.5 18C14.5 18 16.0882 15.5 17.5 15" stroke="#32CD32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+                                <span class="bg-success"></span>
+                            </div>
+                            <div class="facility-text bg-success">
+                                <h3 class="text-success mb-3">Quiz</h3>
+                                <p class="mb-0">Start the quiz to test your knowledge</p>
+                                  <a href="competitive-quiz.html" class="btn btn-dark rounded-pill py-sm-2 px-sm-6 animated slideInRight">Start Quiz</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="facility-item">
+                            <div class="facility-icon bg-warning">
+                                <span class="bg-warning"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="94" height="94" color="#FFFF00" fill="none">
+    <path d="M10.5502 3C6.69782 3.00694 4.6805 3.10152 3.39128 4.39073C2 5.78202 2 8.02125 2 12.4997C2 16.9782 2 19.2174 3.39128 20.6087C4.78257 22 7.0218 22 11.5003 22C15.9787 22 18.218 22 19.6093 20.6087C20.8985 19.3195 20.9931 17.3022 21 13.4498" stroke="#FFFF00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M11.0556 13C10.3322 3.86635 16.8023 1.27554 21.9805 2.16439C22.1896 5.19136 20.7085 6.32482 17.8879 6.84825C18.4326 7.41736 19.395 8.13354 19.2912 9.02879C19.2173 9.66586 18.7846 9.97843 17.9194 10.6036C16.0231 11.9736 13.8264 12.8375 11.0556 13Z" stroke="#FFFF00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9 17C11 11.5 12.9604 9.63636 15 8" stroke="#FFFF00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+                                <span class="bg-warning"></span>
+                            </div>
+                            <div class="facility-text bg-warning">
+                                <h3 class="text-warning mb-3">DPP's</h3>
+                                <p class="mb-0">Solve DPP for tracking learning </p>
+                                <a href="" class="btn btn-dark rounded-pill py-sm-2 px-sm-6 animated slideInRight">Start Solving</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="facility-item">
+                            <div class="facility-icon bg-info">
+                                <span class="bg-info"></span>
+                                <i class="fa fa-chalkboard-teacher fa-3x text-info"></i>
+                                <span class="bg-info"></span>
+                            </div>
+                            <div class="facility-text bg-info">
+                                <h3 class="text-info mb-3">Positive Learning</h3>
+                                <p class="mb-0">Start learning with AI mentors</p>
+                                 <a href="" class="btn btn-dark rounded-pill py-sm-2 px-sm-6 animated slideInRight">Start Learnig</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Facilities End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <h1 class="mb-4">Learn More About Our Work</h1>
+                        <p>We are a team passionate about transforming education with the power of Artificial Intelligence. Our platform brings together smart attendance tracking, personalized academic suggestions, daily routine planning, and AI-trained teachers to create a learning environment that adapts to every student’s unique journey. We believe education should not only be about classrooms but also about personal growth, career readiness, and making the most of every learning opportunity.</p>
+                        <p class="mb-4">Our mission is to empower students, teachers, and institutions with tools that make learning engaging, efficient, and future-ready. By combining real-time data with intelligent recommendations, we ensure that students stay motivated, teachers save valuable time, and institutions foster an ecosystem of productivity and innovation. With our solution, education evolves into a personalized, interactive, and holistic experience designed for the leaders of tomorrow.</p>
+                        <div class="row g-4 align-items-center">
+                            <div class="col-sm-6">
+                                <a class="btn btn-primary rounded-pill py-3 px-5" href="">Read More</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle flex-shrink-0" src="https://via.placeholder.com/45x45/007bff/ffffff?text=CEO" alt="" style="width: 45px; height: 45px;">
+                                    <div class="ms-3">
+                                        <h6 class="text-primary mb-1">Harshmeet</h6>
+                                        <small>CEO</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">
+    <div class="row">
+        <div class="col-12 text-center">
+            <img class="img-fluid square-img rounded-circle bg-light p-3" src="img/WWE.jpg" alt="">
+        </div>
+        <div class="col-6 text-start" style="margin-top: -150px;">
+            <img class="img-fluid square-img rounded-circle bg-light p-3" src="img/Task.jpg" alt="">
+        </div>
+        <div class="col-6 text-end" style="margin-top: -150px;">
+            <img class="img-fluid square-img rounded-circle bg-light p-3" src="img/Ai-mentor.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+        </div>
+        <!-- About End -->
+
+
+        <!-- Call To Action Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="bg-light rounded">
+                    <div class="row g-0">
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
+                            <div class="position-relative h-100">
+                                <img class="position-absolute w-100 h-100 rounded" src="img/Task.jpg" style="object-fit: cover;">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                            <div class="h-100 d-flex flex-column justify-content-center p-5">
+                                <h1 class="mb-4">See My Reports</h1>
+                                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.
+                                    Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet
+                                </p>
+                                <a class="btn btn-primary py-3 px-5" href="">Get My Reports<i class="fa fa-arrow-right ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Call To Action End -->
+
+
+        <!-- Classes Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Buy 2nd Hand School Books</h1>   
+                    <p>Buy a 2nd books in rents or permanent owner of books into less amount to the original amount of book.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                                <img class="img-fluid rounded-circle" src="img/Book1.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">Mathamatics</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="img/Book1.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">Jack Doe</h6>
+                                            <small>Owner name</small>
+                                        </div>
+                                    </div>
+                                      <span class="bg-primary text-white rounded-pill py-2 px-3" href="">Buy:$99</span>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-primary pt-2">
+                                            <h6 class="text-primary mb-1">Preowned:</h6>
+                                            <small>3 Years</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-success pt-2">
+                                            <h6 class="text-success mb-1">Lib. Time:</h6>
+                                            <small>9-10 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-warning pt-2">
+                                            <h6 class="text-warning mb-1">In rent for a session:</h6>
+                                            <small>$15</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                                <img class="img-fluid rounded-circle" src="img/Book2.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">Coloring Book</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="img/Book2.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">Jimmy Smith</h6>
+                                            <small>Owner name</small>
+                                        </div>
+                                    </div>
+                                    <span class="bg-primary text-white rounded-pill py-2 px-3" href="">Buy:$90</span>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-primary pt-2">
+                                            <h6 class="text-primary mb-1">Preowned</h6>
+                                            <small>5 Years</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-success pt-2">
+                                            <h6 class="text-success mb-1">Lib. Time:</h6>
+                                            <small>9-10 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-warning pt-2">
+                                            <h6 class="text-warning mb-1">In rent for a session:</h6>
+                                            <small>$5</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                                <img class="img-fluid rounded-circle" src="img/Book1.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">History Book</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="img/Book1.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">Jhon Doe</h6>
+                                            <small>Book Owner</small>
+                                        </div>
+                                    </div>
+                                    <span class="bg-primary text-white rounded-pill py-2 px-3" href="">Buy:$22</span>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-primary pt-2">
+                                            <h6 class="text-primary mb-1">Preowned:</h6>
+                                            <small>8 Years</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-success pt-2">
+                                            <h6 class="text-success mb-1">Lib. Time:</h6>
+                                            <small>9-10 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-warning pt-2">
+                                            <h6 class="text-warning mb-1">In rent for a session:</h6>
+                                            <small>$5</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                                <img class="img-fluid rounded-circle" src="img/Book2.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">Science Book</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="img/Book2.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">Jam Wings</h6>
+                                            <small>Book Owner</small>
+                                        </div>
+                                    </div>
+                                    <span class="bg-primary text-white rounded-pill py-2 px-3" href="">Buy: $40</span>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-primary pt-2">
+                                            <h6 class="text-primary mb-1"> :</h6>
+                                            <small>4 Years</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-success pt-2">
+                                            <h6 class="text-success mb-1">Lib. Time:</h6>
+                                            <small>9-10 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-warning pt-2">
+                                            <h6 class="text-warning mb-1">In rent for a session:</h6>
+                                            <small>$20</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                                <img class="img-fluid rounded-circle" src="img/Book1.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">Religion & History</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="img/Book1.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">Harry Jhon</h6>
+                                            <small> Book Owner </small>
+                                        </div>
+                                    </div>
+                                    <span class="bg-primary text-white rounded-pill py-2 px-3" href="">$69</span>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-primary pt-2">
+                                            <h6 class="text-primary mb-1">Preowned:</h6>
+                                            <small>2 Years</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-success pt-2">
+                                            <h6 class="text-success mb-1">Lib. Time:</h6>
+                                            <small>9-10 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-warning pt-2">
+                                            <h6 class="text-warning mb-1">In rent for a session:</h6>
+                                            <small>$10</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="classes-item">
+                            <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                                <img class="img-fluid rounded-circle" src="img/Book2.jpg" alt="">
+                            </div>
+                            <div class="bg-light rounded p-4 pt-5 mt-n5">
+                                <a class="d-block text-center h3 mt-3 mb-4" href="">General Knowledge Book</a>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle flex-shrink-0" src="img/Book2.jpg" alt="" style="width: 45px; height: 45px;">
+                                        <div class="ms-3">
+                                            <h6 class="text-primary mb-1">Tom Wings</h6>
+                                            <small>Book Ownerr</small>
+                                        </div>
+                                    </div>
+                                    <span class="bg-primary text-white rounded-pill py-2 px-3" href="">$39</span>
+                                </div>
+                                <div class="row g-1">
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-primary pt-2">
+                                            <h6 class="text-primary mb-1">Preowned:</h6>
+                                            <small>1 Years</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-success pt-2">
+                                            <h6 class="text-success mb-1">Lib. Time:</h6>
+                                            <small>9-10 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="border-top border-3 border-warning pt-2">
+                                            <h6 class="text-warning mb-1">In rent for a session:</h6>
+                                            <small>$25</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Classes End -->
+
+
+        <!-- Appointment Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="bg-light rounded">
+                    <div class="row g-0">
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                            <div class="h-100 d-flex flex-column justify-content-center p-5">
+                                <h1 class="mb-4">Order Sessional Books</h1>
+                                <h4 class="mb-4">Buy in rent or become permanent owner</h4>
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-sm-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control border-0" id="gname" placeholder="Gurdian Name">
+                                                <label for="gname">Student name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control border-0" id="gmail" placeholder="Gurdian Email">
+                                                <label for="gmail">Student’s Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control border-0" id="cname" placeholder="Child Name">
+                                                <label for="cname">Class</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control border-0" id="cage" placeholder="Child Age">
+                                                <label for="cage">Mobli no.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                                <label for="message">Message</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
+                            <div class="position-relative h-100">
+                                <img class="position-absolute w-100 h-100 rounded" src="img/attendance.jpg" style="object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Appointment End -->
+
+
+        <!-- Team Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Ai mentors</h1>
+                    <p>Solve your doubt with are trained chatbot</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item position-relative">
+                            <img class="img-fluid rounded-circle w-75" src="img/team-1.jpg" alt="">
+                            <div class="team-text">
+                                <h3>Lena Smith</h3>
+                                <h4>Ai Chatbot</h4>
+                                <p>History Mentor</p>
+                                <div class="d-flex align-items-center">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="team-item position-relative">
+                            <img class="img-fluid rounded-circle w-75" src="img/team-2.jpg" alt="">
+                            <div class="team-text">
+                                <h3>Mark Jhon</h3>
+                                <h4>Ai Chatbot</h4>
+                                <p>Math Mentor</p>
+                                <div class="d-flex align-items-center">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="team-item position-relative">
+                            <img class="img-fluid rounded-circle w-75" src="img/team-3.jpg" alt="">
+                            <div class="team-text">
+                                <h3>Zosia Kirke</h3>
+                                <h4>Ai Chatbot</h4>
+                                <p>History Mentor</p>
+                                <div class="d-flex align-items-center">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary  mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Team End -->
+
+
+        <!-- Testimonial Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Our Clients Say!</h1>
+                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item bg-light rounded p-5">
+                        <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                        <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 90px; height: 90px;">
+                            <div class="ps-3">
+                                <h3 class="mb-1">Client Name</h3>
+                                <span>Profession</span>
+                            </div>
+                            <i class="fa fa-quote-right fa-3x text-primary ms-auto d-none d-sm-flex"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-5">
+                        <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                        <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg" style="width: 90px; height: 90px;">
+                            <div class="ps-3">
+                                <h3 class="mb-1">Client Name</h3>
+                                <span>Profession</span>
+                            </div>
+                            <i class="fa fa-quote-right fa-3x text-primary ms-auto d-none d-sm-flex"></i>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-5">
+                        <p class="fs-5">Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                        <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg" style="width: 90px; height: 90px;">
+                            <div class="ps-3">
+                                <h3 class="mb-1">Client Name</h3>
+                                <span>Profession</span>
+                            </div>
+                            <i class="fa fa-quote-right fa-3x text-primary ms-auto d-none d-sm-flex"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Get In Touch</h3>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Quick Links</h3>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Photo Gallery</h3>
+                        <div class="row g-2 pt-2">
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Book1.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Ai-mentor.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Quiz.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Book2.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Task.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/attendance.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Newsletter</h3>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+							
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By <a class="border-bottom" href="#">Team Paradox</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

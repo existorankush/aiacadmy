@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Study Resources - AIcademy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Comprehensive study resources for JEE, GATE, and Board exams" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/Style.css" rel="stylesheet">
+    
+    <!-- Custom Resource Styles -->
+    <style>
+        .resource-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .filter-sidebar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .resource-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .resource-type-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-weight: 600;
+        }
+        
+        .condition-badge {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .rating-stars {
+            color: #ffc107;
+        }
+        
+        .resource-actions {
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        
+        .filter-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .filter-section:last-child {
+            border-bottom: none;
+        }
+        
+        .resource-stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .recommendation-card {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            border: none;
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .wishlist-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .wishlist-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .quick-filters {
+            margin-bottom: 2rem;
+        }
+        
+        .quick-filter-btn {
+            margin: 0.25rem;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 2px solid #e9ecef;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-filter-btn:hover,
+        .quick-filter-btn.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="m-0 text-primary"><i class="fa fa-book-reader me-3"></i>AIcademy</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav mx-auto">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="#" class="nav-item nav-link">About Us</a>
+                    <a href="#" class="nav-item nav-link">Classes</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            <a href="quiz-bot.html" class="dropdown-item">General Quiz</a>
+                            <a href="sst-quiz-bot.html" class="dropdown-item">SST Quiz Bot</a>
+                            <a href="competitive-quiz.html" class="dropdown-item">Competitive Exams</a>
+                            <a href="resource.html" class="dropdown-item active">Study Resources</a>
+                            <a href="tutorial.html" class="dropdown-item">Tutorial</a>
+                            <a href="chatbot.html" class="dropdown-item">Chatbot</a>
+                            <a href="#" class="dropdown-item">Leaderboard</a>
+                            <a href="#" class="dropdown-item">Team Page</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link">Contact Us</a>
+                </div>
+                <a href="#" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Join Us<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+        <!-- Hero Section -->
+        <div class="resource-hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h1 class="display-4 mb-3">📚 Study Resources Hub</h1>
+                        <p class="lead mb-4">Discover the best books, e-books, notes, and study materials for JEE, GATE, and Board exams. New, used, rental options available!</p>
+                        
+                        <!-- Search Bar -->
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input type="text" id="resource-search" class="form-control search-box" placeholder="Search books, notes, or topics...">
+                                    <button class="btn btn-light" type="button" id="search-btn">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="resource-stats text-center">
+                            <div class="stat-number" id="total-resources">2,500+</div>
+                            <div class="stat-label">Study Resources</div>
+                            <hr class="my-3">
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <div class="h4" id="books-count">1,200</div>
+                                    <small>Books</small>
+                                </div>
+                                <div>
+                                    <div class="h4" id="ebooks-count">800</div>
+                                    <small>E-Books</small>
+                                </div>
+                                <div>
+                                    <div class="h4" id="notes-count">500</div>
+                                    <small>Notes</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero Section End -->
+
+        <!-- Quick Filters -->
+        <div class="container mt-5">
+            <div class="quick-filters text-center">
+                <h5 class="mb-3">Quick Filters:</h5>
+                <button class="btn quick-filter-btn active" data-filter="all">All Resources</button>
+                <button class="btn quick-filter-btn" data-filter="books">📚 Books</button>
+                <button class="btn quick-filter-btn" data-filter="ebooks">💻 E-Books</button>
+                <button class="btn quick-filter-btn" data-filter="notes">📝 Notes</button>
+                <button class="btn quick-filter-btn" data-filter="new">🆕 New</button>
+                <button class="btn quick-filter-btn" data-filter="used">♻️ Used</button>
+                <button class="btn quick-filter-btn" data-filter="rental">📅 Rental</button>
+                <button class="btn quick-filter-btn" data-filter="free">🆓 Free</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <div class="row">
+                <!-- Filter Sidebar -->
+                <div class="col-lg-3">
+                    <div class="filter-sidebar">
+                        <h5><i class="fas fa-filter me-2"></i>Filters</h5>
+                        
+                        <!-- Exam Filter -->
+                        <div class="filter-section">
+                            <h6>Exam</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="jee-filter" value="jee" checked>
+                                <label class="form-check-label" for="jee-filter">JEE Main & Advanced</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gate-filter" value="gate" checked>
+                                <label class="form-check-label" for="gate-filter">GATE</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="boards-filter" value="boards" checked>
+                                <label class="form-check-label" for="boards-filter">Class 12 Boards</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="neet-filter" value="neet">
+                                <label class="form-check-label" for="neet-filter">NEET</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Subject Filter -->
+                        <div class="filter-section">
+                            <h6>Subject</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="physics-filter" value="physics" checked>
+                                <label class="form-check-label" for="physics-filter">Physics</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chemistry-filter" value="chemistry" checked>
+                                <label class="form-check-label" for="chemistry-filter">Chemistry</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="mathematics-filter" value="mathematics" checked>
+                                <label class="form-check-label" for="mathematics-filter">Mathematics</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="biology-filter" value="biology">
+                                <label class="form-check-label" for="biology-filter">Biology</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Resource Type Filter -->
+                        <div class="filter-section">
+                            <h6>Resource Type</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="textbook-filter" value="textbook" checked>
+                                <label class="form-check-label" for="textbook-filter">Textbooks</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="reference-filter" value="reference" checked>
+                                <label class="form-check-label" for="reference-filter">Reference Books</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ebook-filter" value="ebook" checked>
+                                <label class="form-check-label" for="ebook-filter">E-Books</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="notes-filter" value="notes" checked>
+                                <label class="form-check-label" for="notes-filter">Study Notes</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Price Range -->
+                        <div class="filter-section">
+                            <h6>Price Range</h6>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="min-price" placeholder="Min ₹">
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="max-price" placeholder="Max ₹">
+                                </div>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="free-filter" value="free">
+                                <label class="form-check-label" for="free-filter">Free Resources</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Condition -->
+                        <div class="filter-section">
+                            <h6>Condition</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="new-condition" value="new" checked>
+                                <label class="form-check-label" for="new-condition">New</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="like-new-condition" value="like-new" checked>
+                                <label class="form-check-label" for="like-new-condition">Like New</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="good-condition" value="good" checked>
+                                <label class="form-check-label" for="good-condition">Good</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fair-condition" value="fair">
+                                <label class="form-check-label" for="fair-condition">Fair</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Rating -->
+                        <div class="filter-section">
+                            <h6>Minimum Rating</h6>
+                            <select class="form-select" id="rating-filter">
+                                <option value="0">Any Rating</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="3">3+ Stars</option>
+                                <option value="2">2+ Stars</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" id="apply-filters">
+                                <i class="fas fa-search me-2"></i>Apply Filters
+                            </button>
+                            <button class="btn btn-outline-secondary" id="clear-filters">
+                                <i class="fas fa-times me-2"></i>Clear All
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommendations -->
+                    <div class="card recommendation-card mt-4">
+                        <div class="card-body text-center">
+                            <h6><i class="fas fa-star me-2"></i>Recommended for You</h6>
+                            <p class="small mb-3">Based on your quiz performance and study history</p>
+                            <div id="personal-recommendations">
+                                <!-- Dynamic recommendations will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resource Grid -->
+                <div class="col-lg-9">
+                    <!-- Sort and View Options -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <span id="results-count" class="text-muted">Showing 1-20 of 2,500+ results</span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <select class="form-select" id="sort-options" style="width: auto;">
+                                <option value="relevance">Sort by Relevance</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="newest">Newest First</option>
+                                <option value="popular">Most Popular</option>
+                            </select>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-outline-secondary active" id="grid-view">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary" id="list-view">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Resource Cards Container -->
+                    <div id="resource-container" class="row">
+                        <!-- Resources will be dynamically loaded here -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Resource pagination">
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- Pagination will be dynamically generated -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Get In Touch</h3>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Quick Links</h3>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Photo Gallery</h3>
+                        <div class="row g-2 pt-2">
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Book1.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Book2.jpg" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="img/Book3.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h3 class="text-white mb-4">Newsletter</h3>
+                        <p>Get updates on new resources and study materials.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">AIcademy</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Book Recommendation Engine -->
+    <script src="js/book-recommendation-engine.js"></script>
+    
+    <!-- Resource Management Javascript -->
+    <script src="js/resource-manager.js"></script>
+</body>
+
+</html>

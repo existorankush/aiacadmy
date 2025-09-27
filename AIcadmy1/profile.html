@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>My Profile - AIcademy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Animate CSS -->
+    <link href="animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/Style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .profile-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.3);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .achievement-card.unlocked {
+            border-left-color: var(--success);
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(255, 255, 255, 1));
+        }
+
+        .achievement-card.locked {
+            border-left-color: var(--light);
+            background: rgba(248, 249, 250, 0.7);
+            opacity: 0.7;
+        }
+
+        .progress-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .progress-ring-circle {
+            width: 120px;
+            height: 120px;
+            fill: transparent;
+            stroke-width: 8;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-background {
+            stroke: #e6e6e6;
+        }
+
+        .progress-ring-fill {
+            stroke: var(--primary);
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .subject-progress {
+            margin-bottom: 1.5rem;
+        }
+
+        .subject-progress-bar {
+            height: 12px;
+            border-radius: 6px;
+            background: #e9ecef;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .subject-progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 1s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move 1s linear infinite;
+        }
+
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        .recent-activity {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            color: white;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            color: #8b4513;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .level-indicator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .weak-topics {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(255, 255, 255, 0.9));
+            border-left: 5px solid var(--danger);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .topic-chip {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            margin: 0.25rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .profile-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .achievement-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+        <a href="index.html" class="navbar-brand">
+            <h1 class="m-0 text-primary"><i class="fa fa-book-reader me-3"></i>AIcademy</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="competitive-quiz.html" class="nav-item nav-link">Quiz</a>
+                <a href="resource.html" class="nav-item nav-link">Resources</a>
+                <a href="profile.html" class="nav-item nav-link active">Profile</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="profile-container">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2 id="profileName">Loading...</h2>
+                    <p class="mb-2" id="profileJoinDate">Member since: Loading...</p>
+                    <div class="rank-badge" id="globalRank">
+                        <i class="fas fa-crown me-2"></i>
+                        <span>Loading rank...</span>
+                    </div>
+                </div>
+
+                <div class="p-4">
+                    <!-- Level Indicator -->
+                    <div class="level-indicator">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h4 class="mb-1">Level <span id="currentLevel">1</span></h4>
+                                <p class="mb-0">Progress to Level <span id="nextLevel">2</span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="progress-ring">
+                                    <svg class="progress-ring-svg">
+                                        <circle class="progress-ring-circle progress-ring-background" cx="60" cy="60" r="50"></circle>
+                                        <circle class="progress-ring-circle progress-ring-fill" cx="60" cy="60" r="50" id="levelProgress"></circle>
+                                    </svg>
+                                    <div class="progress-text" id="xpProgress">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Grid -->
+                    <div class="profile-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(45deg, #667eea, #764ba2);">
+                                <i class="fas fa-quiz"></i>
+                            </div>
+                            <h3 id="totalQuizzes">0</h3>
+                            <p class="text-muted mb-0">Total Quizzes</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(45deg, #28a745, #20c997);">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 id="averageScore">0%</h3>
+                            <p class="text-muted mb-0">Average Score</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(45deg, #ffc107, #fd7e14);">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3 id="currentStreak">0</h3>
+                            <p class="text-muted mb-0">Day Streak</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(45deg, #17a2b8, #6f42c1);">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 id="experiencePoints">0</h3>
+                            <p class="text-muted mb-0">Experience Points</p>
+                        </div>
+                    </div>
+
+                    <!-- Content Tabs -->
+                    <ul class="nav nav-pills nav-justified mt-4" id="profileTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="achievements-tab" data-bs-toggle="pill" data-bs-target="#achievements" type="button" role="tab">
+                                <i class="fas fa-trophy me-2"></i>Achievements
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="progress-tab" data-bs-toggle="pill" data-bs-target="#progress" type="button" role="tab">
+                                <i class="fas fa-chart-bar me-2"></i>Progress
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="activity-tab" data-bs-toggle="pill" data-bs-target="#activity" type="button" role="tab">
+                                <i class="fas fa-history me-2"></i>Activity
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="recommendations-tab" data-bs-toggle="pill" data-bs-target="#recommendations" type="button" role="tab">
+                                <i class="fas fa-lightbulb me-2"></i>Recommendations
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content mt-4" id="profileTabsContent">
+                        <!-- Achievements Tab -->
+                        <div class="tab-pane fade show active" id="achievements" role="tabpanel">
+                            <h5 class="mb-4">🏆 Your Achievements</h5>
+                            <div class="achievement-grid" id="achievementGrid">
+                                <!-- Achievements will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Progress Tab -->
+                        <div class="tab-pane fade" id="progress" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h5 class="mb-4">📊 Subject-wise Progress</h5>
+                                    <div id="subjectProgress">
+                                        <!-- Subject progress will be loaded here -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="weak-topics">
+                                        <h6 class="text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Areas to Improve</h6>
+                                        <div id="weakTopics">
+                                            <!-- Weak topics will be loaded here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity Tab -->
+                        <div class="tab-pane fade" id="activity" role="tabpanel">
+                            <h5 class="mb-4">📋 Recent Activity</h5>
+                            <div class="recent-activity" id="recentActivity">
+                                <!-- Activity will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Recommendations Tab -->
+                        <div class="tab-pane fade" id="recommendations" role="tabpanel">
+                            <h5 class="mb-4">💡 Personalized Recommendations</h5>
+                            <div id="studyRecommendations">
+                                <!-- Recommendations will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="text-center mt-4">
+                        <a href="competitive-quiz.html" class="btn btn-gradient me-3">
+                            <i class="fas fa-play me-2"></i>Start New Quiz
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="exportProfileData()">
+                            <i class="fas fa-download me-2"></i>Export Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/progress-tracker.js"></script>
+    <script src="js/leaderboard-system.js"></script>
+    <script src="js/study-materials.js"></script>
+
+    <script>
+        // Initialize systems
+        window.progressTracker = new ProgressTracker();
+        window.leaderboardSystem = new LeaderboardSystem();
+        window.studyMaterials = new StudyMaterials();
+
+        // Load profile data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfileData();
+        });
+
+        function loadProfileData() {
+            const progressData = window.progressTracker.getDetailedProgress();
+            const rankingInfo = window.leaderboardSystem.getUserRankingInfo();
+
+            // Update profile header
+            document.getElementById('profileName').textContent = progressData.userProfile.username || 'Student';
+            document.getElementById('profileJoinDate').textContent = 
+                'Member since: ' + new Date(progressData.userProfile.registrationDate).toLocaleDateString();
+
+            // Update rank
+            const rankElement = document.getElementById('globalRank');
+            if (rankingInfo.found && rankingInfo.globalRank?.allTime) {
+                rankElement.innerHTML = `<i class="fas fa-crown me-2"></i>Global Rank: #${rankingInfo.globalRank.allTime}`;
+            } else {
+                rankElement.innerHTML = `<i class="fas fa-user me-2"></i>Take your first quiz to get ranked!`;
+            }
+
+            // Update level progress
+            document.getElementById('currentLevel').textContent = progressData.userProfile.level;
+            document.getElementById('nextLevel').textContent = progressData.userProfile.level + 1;
+            
+            const levelProgressPercent = progressData.nextLevelProgress.progressPercent;
+            document.getElementById('xpProgress').textContent = levelProgressPercent + '%';
+            
+            // Animate progress ring
+            const progressRing = document.getElementById('levelProgress');
+            const circumference = 2 * Math.PI * 50;
+            const offset = circumference - (levelProgressPercent / 100) * circumference;
+            progressRing.style.strokeDashoffset = offset;
+
+            // Update statistics
+            document.getElementById('totalQuizzes').textContent = progressData.statistics.totalQuizzes;
+            document.getElementById('averageScore').textContent = progressData.statistics.averageScore + '%';
+            document.getElementById('currentStreak').textContent = progressData.statistics.currentStreak;
+            document.getElementById('experiencePoints').textContent = progressData.statistics.experiencePoints.toLocaleString();
+
+            // Load tab content
+            loadAchievements(progressData);
+            loadSubjectProgress(progressData);
+            loadRecentActivity(progressData);
+            loadRecommendations(progressData);
+        }
+
+        function loadAchievements(progressData) {
+            const achievementGrid = document.getElementById('achievementGrid');
+            const allAchievements = progressData.achievements.available || [];
+            const unlockedAchievements = progressData.achievements.unlocked || [];
+
+            let html = '';
+            
+            allAchievements.forEach(achievement => {
+                const isUnlocked = unlockedAchievements.includes(achievement.id);
+                const cardClass = isUnlocked ? 'unlocked' : 'locked';
+                const icon = isUnlocked ? '🏆' : '🔒';
+                
+                html += `
+                    <div class="achievement-card ${cardClass}">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="fs-3 me-3">${icon}</span>
+                            <div>
+                                <h6 class="mb-1">${achievement.name}</h6>
+                                <small class="text-muted">${achievement.description}</small>
+                            </div>
+                        </div>
+                        ${isUnlocked ? 
+                            '<div class="text-success small"><i class="fas fa-check me-1"></i>Unlocked</div>' :
+                            '<div class="text-muted small"><i class="fas fa-lock me-1"></i>Locked</div>'
+                        }
+                    </div>
+                `;
+            });
+
+            if (html === '') {
+                html = '<div class="alert alert-info">No achievements available yet. Start taking quizzes to unlock achievements!</div>';
+            }
+
+            achievementGrid.innerHTML = html;
+        }
+
+        function loadSubjectProgress(progressData) {
+            const subjectProgressDiv = document.getElementById('subjectProgress');
+            const subjectProgress = progressData.subjectProgress || {};
+
+            let html = '';
+            
+            Object.entries(subjectProgress).forEach(([subject, data]) => {
+                const trendIcon = data.recentTrend === 'improving' ? 'fa-arrow-up text-success' :
+                                 data.recentTrend === 'declining' ? 'fa-arrow-down text-danger' :
+                                 'fa-minus text-warning';
+                
+                html += `
+                    <div class="subject-progress">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">${subject.charAt(0).toUpperCase() + subject.slice(1)}</h6>
+                            <div>
+                                <i class="fas ${trendIcon} me-2"></i>
+                                <span class="fw-bold">${data.averageScore}%</span>
+                                <small class="text-muted ms-2">(${data.totalQuizzes} quizzes)</small>
+                            </div>
+                        </div>
+                        <div class="subject-progress-bar">
+                            <div class="subject-progress-fill" style="width: ${data.averageScore}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (html === '') {
+                html = '<div class="alert alert-info">No subject progress yet. Take some quizzes to see your progress!</div>';
+            }
+
+            subjectProgressDiv.innerHTML = html;
+
+            // Load weak topics
+            const weakTopicsDiv = document.getElementById('weakTopics');
+            const weakTopics = progressData.weakTopics || [];
+            
+            if (weakTopics.length > 0) {
+                let weakHtml = '';
+                weakTopics.slice(0, 8).forEach(topic => {
+                    weakHtml += `<span class="topic-chip">${topic.topic} (${Math.round(topic.accuracy)}%)</span>`;
+                });
+                weakTopicsDiv.innerHTML = weakHtml;
+            } else {
+                weakTopicsDiv.innerHTML = '<p class="text-muted small">No weak areas identified yet!</p>';
+            }
+        }
+
+        function loadRecentActivity(progressData) {
+            const activityDiv = document.getElementById('recentActivity');
+            // For demo purposes, creating sample activity data
+            const activities = [
+                { type: 'quiz', subject: 'Physics', score: 85, time: '2 hours ago', icon: 'fa-quiz' },
+                { type: 'achievement', name: 'Quiz Master', time: '1 day ago', icon: 'fa-trophy' },
+                { type: 'quiz', subject: 'Mathematics', score: 92, time: '2 days ago', icon: 'fa-quiz' },
+                { type: 'level_up', level: progressData.userProfile.level, time: '3 days ago', icon: 'fa-star' },
+            ];
+
+            let html = '';
+            activities.forEach(activity => {
+                const iconColor = activity.type === 'quiz' ? '#667eea' :
+                                 activity.type === 'achievement' ? '#28a745' :
+                                 activity.type === 'level_up' ? '#ffc107' : '#17a2b8';
+                
+                let activityText = '';
+                if (activity.type === 'quiz') {
+                    activityText = `Completed ${activity.subject} quiz with ${activity.score}% score`;
+                } else if (activity.type === 'achievement') {
+                    activityText = `Unlocked achievement: ${activity.name}`;
+                } else if (activity.type === 'level_up') {
+                    activityText = `Reached Level ${activity.level}`;
+                }
+
+                html += `
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: ${iconColor};">
+                            <i class="fas ${activity.icon}"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fw-medium">${activityText}</div>
+                            <small class="text-muted">${activity.time}</small>
+                        </div>
+                    </div>
+                `;
+            });
+
+            activityDiv.innerHTML = html || '<div class="alert alert-info">No recent activity</div>';
+        }
+
+        function loadRecommendations(progressData) {
+            const recommendationsDiv = document.getElementById('studyRecommendations');
+            const recommendations = progressData.studyRecommendations || [];
+
+            let html = '';
+            recommendations.forEach(rec => {
+                const priorityColor = rec.priority === 'high' ? 'danger' :
+                                   rec.priority === 'medium' ? 'warning' : 'info';
+                
+                html += `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="card-title mb-0">${rec.title}</h6>
+                                <span class="badge bg-${priorityColor}">${rec.priority.toUpperCase()}</span>
+                            </div>
+                            <p class="card-text">${rec.description}</p>
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>Estimated time: ${rec.estimatedTime}
+                            </small>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (html === '') {
+                html = '<div class="alert alert-info">Take more quizzes to get personalized recommendations!</div>';
+            }
+
+            recommendationsDiv.innerHTML = html;
+        }
+
+        function exportProfileData() {
+            if (window.progressTracker) {
+                window.progressTracker.exportProgressData();
+            } else {
+                alert('Progress tracker not available');
+            }
+        }
+
+        // Animate progress bars when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.subject-progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe the progress section
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressSection = document.getElementById('subjectProgress');
+            if (progressSection) {
+                observer.observe(progressSection);
+            }
+        });
+    </script>
+</body>
+
+</html>

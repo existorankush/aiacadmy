@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AIcademy - Chatbot</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/Style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="m-0 text-primary"><i class="fa fa-book-reader me-3"></i>AIcademy</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav mx-auto">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="#" class="nav-item nav-link">About Us</a>
+                    <a href="#" class="nav-item nav-link">Classes</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            <a href="quiz-bot.html" class="dropdown-item">General Quiz</a>
+                            <a href="sst-quiz-bot.html" class="dropdown-item">SST Quiz Bot</a>
+                            <a href="competitive-quiz.html" class="dropdown-item">Competitive Exams</a>
+                            <a href="resource.html" class="dropdown-item">Study Resources</a>
+                            <a href="tutorial.html" class="dropdown-item">Tutorial</a>
+                            <a href="chatbot.html" class="dropdown-item active">Chatbot</a>
+                            <a href="#" class="dropdown-item">Leaderboard</a>
+                            <a href="#" class="dropdown-item">Team Page</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link">Contact Us</a>
+                </div>
+                <a href="#" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Join Us<i class="fa fa-arrow-right ms-3"></i></a>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+        <div class="container my-5">
+            <h2 class="mb-3"><i class="fas fa-robot me-2"></i>AI Study Buddy Chatbot</h2>
+            <p class="text-muted">Runs fully in your browser for live preview. No localhost or Python backend required.</p>
+
+            <!-- Chat UI -->
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <span class="badge bg-success me-2">Online</span>
+                        <strong>AI Study Buddy</strong>
+                    </div>
+                    <button id="clearChat" class="btn btn-outline-danger btn-sm">Clear Chat</button>
+                </div>
+                <div class="card-body" style="height: 50vh; overflow-y: auto;" id="chatMessages">
+                    <!-- Messages will render here -->
+                </div>
+                <div class="card-footer">
+                    <div id="typingIndicator" class="text-muted mb-2" style="display:none;">
+                        <i class="fas fa-ellipsis-h"></i> AI is typing...
+                    </div>
+                    <div class="input-group">
+                        <input id="chatInput" type="text" class="form-control" placeholder="Ask anything about your studies...">
+                        <button id="sendMessage" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>
